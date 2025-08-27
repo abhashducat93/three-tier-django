@@ -1,0 +1,37 @@
+services:
+  app:
+    build: ./app  # Point to the app directory where Dockerfile is located
+    command: sh -c "sleep 5 && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./app:/app  # Mount the app directory
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - ALLOWED_HOSTS=localhost,127.0.0.1,172.31.83.172
+      - DJANGO_SETTINGS_MODULE=myproject.settings
+    depends_on:
+      - db
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "8083:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_volume:/app/staticfiles
+    depends_on:
+      - app
+
+  db:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_DB=mydatabase
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  static_volume:
