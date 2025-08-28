@@ -76,4 +76,4 @@ STATIC_ROOT = '/app/staticfiles/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8083", "http://127.0.0.1:8083", "http://3.95.184.79:8083", 'http://localhost:8083', 'http://127.0.0.1:8083', 'http://3.95.184.79:8083']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8083', 'http://127.0.0.1:8083', 'http://3.95.184.79:8083']

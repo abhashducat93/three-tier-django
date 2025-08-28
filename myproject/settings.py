@@ -121,3 +121,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Dynamic CSRF settings
+import socket
+hostname = socket.gethostname()
+local_ip = socket.gethostbyname(hostname)
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8083',
+    'http://127.0.0.1:8083',
+    'http://3.95.184.79:8083',
+    f'http://{local_ip}:8083',
+]
