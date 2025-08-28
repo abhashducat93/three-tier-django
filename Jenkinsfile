@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', 
-                url: 'https://github.com/yourusername/three-tier-django.git'
+                url: 'https://github.com/abhashducat93/three-tier-django.git'
             }
         }
         
@@ -48,8 +48,8 @@ pipeline {
         stage('Health Check') {
             steps {
                 sh 'sleep 15'
-                sh 'curl -f http://localhost:8080/health/ || exit 1'
-                sh 'curl -f http://localhost:8080/ || exit 1'
+                sh 'curl -f http://localhost:8083/health/ || exit 1'
+                sh 'curl -f http://localhost:8083/ || exit 1'
             }
         }
     }
@@ -62,7 +62,7 @@ pipeline {
         
         success {
             echo 'Three-tier deployment successful!'
-            echo 'Access your app at: http://localhost:8080'
+            echo 'Access your app at: http://localhost:8083'
         }
         
         failure {
